@@ -1,44 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  spring-boot-app
-  namespace: default
-  labels:
-    app:  spring-boot-app
+  name: springboot-crud-deployment
 spec:
   selector:
     matchLabels:
-      app: spring-boot-app
+      app: springboot-k8s-mysql
   replicas: 3
   template:
     metadata:
       labels:
-        app:  spring-boot-app
+        app: springboot-k8s-mysql
     spec:
       containers:
-      - name:  spring-boot-app
-        image:  shubham1807/springbootapp:latest
-        env:
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: db-config
-              key: host
-        - name: DB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secrets
-              key: username
-        - name: DB_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: db-config
-              key: dbname
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secrets
-              key: password
-        ports:
-        - containerPort:  8080
-      restartPolicy: Always
+        - name: springboot-crud-k8s
+          image: shubham1807/book-store:v3
+          ports:
+            - containerPort: 8080
+          env:   # Setting Enviornmental Variables
+            - name: DB_HOST   # Setting Database host address from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: host
+            - name: DB_NAME  # Setting Database name from configMap
+              valueFrom :
+                configMapKeyRef:
+                  name: db-config
+                  key: dbname
+            - name: DB_USERNAME  # Setting Database username from Secret
+              valueFrom :
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: username
+            - name: DB_PASSWORD # Setting Database password from Secret
+              valueFrom :
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: password

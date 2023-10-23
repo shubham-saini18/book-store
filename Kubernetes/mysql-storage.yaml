@@ -1,5 +1,5 @@
-kind: PersistentVolume
 apiVersion: v1
+kind: PersistentVolume
 metadata:
   name: mysql-pv-volume
   labels:
@@ -8,14 +8,14 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 250Mi
+    storage: 1Gi
   accessModes:
     - ReadWriteMany
   hostPath:
     path: "/mnt/data"
 ---
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
   labels:
@@ -26,4 +26,4 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 250Mi
+      storage: 1Gi
