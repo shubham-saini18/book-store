@@ -1,39 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springboot-crud-deployment
+  name: bookstore-deployment
 spec:
   selector:
     matchLabels:
-      app: springboot-k8s-mysql
+      app: bookstore
   replicas: 3
   template:
     metadata:
       labels:
-        app: springboot-k8s-mysql
+        app: bookstore
     spec:
       containers:
-        - name: springboot-crud-k8s
-          image: shubham1807/book-store:v3
+        - name: bookstore
+          image: shubham1807/book-store:1.0
           ports:
             - containerPort: 8080
-          env:   # Setting Enviornmental Variables
-            - name: DB_HOST   # Setting Database host address from configMap
+          env:   
+            - name: DB_HOST   
               valueFrom:
                 configMapKeyRef:
                   name: db-config
                   key: host
-            - name: DB_NAME  # Setting Database name from configMap
+            - name: DB_NAME  
               valueFrom :
                 configMapKeyRef:
                   name: db-config
                   key: dbname
-            - name: DB_USERNAME  # Setting Database username from Secret
+            - name: DB_USERNAME  
               valueFrom :
                 secretKeyRef:
                   name: mysql-secrets
                   key: username
-            - name: DB_PASSWORD # Setting Database password from Secret
+            - name: DB_PASSWORD 
               valueFrom :
                 secretKeyRef:
                   name: mysql-secrets
