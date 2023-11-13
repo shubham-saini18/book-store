@@ -72,7 +72,7 @@ class BookControllerTest {
     @Test
     void testGetMyList() {
         int id = 1;
-        Book book = new Book(id, "Test Book", "Test Author", 200);
+        Book book = new Book(id, "Test Book", "Test Author", "200");
         when(bookService.getBookById(id)).thenReturn(book);
 
         String redirect = bookController.getMyList(id);
@@ -84,7 +84,7 @@ class BookControllerTest {
     @Test
     void testEditBook() {
         int id = 1;
-        Book book = new Book(id, "Test Book", "Test Author", 20.0);
+        Book book = new Book(id, "Test Book", "Test Author", "200");
         when(bookService.getBookById(id)).thenReturn(book);
 
         String viewName = bookController.editBook(id, model);
