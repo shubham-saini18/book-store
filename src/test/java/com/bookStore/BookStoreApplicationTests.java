@@ -4,7 +4,7 @@ import com.bookStore.entity.MyBookList;
 import com.bookStore.service.BookService;
 import com.bookStore.service.MyBookListService;
 import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -57,8 +57,8 @@ class BookControllerTest {
         verify(bookService, times(1)).save(book);
     }
 
-    @Test
-    /*void testGetMyBooks() {
+    /*@Test
+    void testGetMyBooks() {
         List<MyBookList> myBookList = new ArrayList<>();
         when(myBookListService.getAllMyBooks()).thenReturn(myBookList);
 
@@ -81,8 +81,8 @@ class BookControllerTest {
         verify(myBookListService, times(1)).saveMyBooks(any(MyBookList.class));
     }
 
-    @Test
-    /*void testEditBook() {
+    /*@Test
+    void testEditBook() {
         int id = 1;
         Book book = new Book(id, "Test Book", "Test Author", "200");
         when(bookService.getBookById(id)).thenReturn(book);
