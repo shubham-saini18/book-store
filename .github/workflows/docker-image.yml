@@ -16,7 +16,16 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag book-store:$(date +%s)
-    - name: Run the MySQL Docker image
-      run: docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root 
-    - name: Run the Docker image
-      run: docker run -d -p 8080:8080 --name bookStore book-store:$(date +%s)
+    - name: login Docker-hub
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
+    - name: Tag the Docker image
+      run: docker tag book-store:$(date +%s) shubham1807/book-store:latest
+    - name: Push Docker image to Docker Hub
+      run: docker push shubham1807/book-store:latest
+    - name: Update Kubernetes manifests
+      run: sed -i 's#image: shubham1807/book-store:.*#image: your-docker-hub-username/book-store:latest#' cd Kubernetes/app-deployment.yaml
+    - name: Apply Kubernetes manifests
+      run: kubectl apply -f /kubernetes
+
+
+      
