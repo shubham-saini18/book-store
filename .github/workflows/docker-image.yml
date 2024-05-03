@@ -21,7 +21,9 @@ jobs:
     - name: Tag the Docker image
       run: docker tag book-store:latest ${{ secrets.DOCKER_USERNAME }}/book-store:latest
     - name: Push Docker image to Docker Hub
-      run: docker images
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/book-store:latest
+    - name: kubernetes
+      run: kubectl apply -f kubernetes/
     
 
 
