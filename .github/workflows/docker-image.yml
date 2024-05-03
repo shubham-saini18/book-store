@@ -21,9 +21,8 @@ jobs:
     - name: Tag the Docker image
       run: docker tag book-store:$(date +%s) shubham1807/book-store:latest
     - name: Push Docker image to Docker Hub
-      run: docker push shubham1807/book-store:latest
-    - name: Apply Kubernetes manifests
-      run: kubectl apply -f /kubernetes
+      run: docker images
+    
 
 
       
