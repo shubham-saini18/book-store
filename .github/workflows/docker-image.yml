@@ -22,8 +22,10 @@ jobs:
       run: docker tag book-store:latest ${{ secrets.DOCKER_USERNAME }}/book-store:latest
     - name: Push Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKER_USERNAME }}/book-store:latest
-    - name: kubernetes
-      run: kubectl apply -f Kubernetes/
+    - name: run MySQL COntainer
+      run: docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=bookstore --name mysql mysql:latest
+    - name: run APP COntainer
+      run: docker run -d -p 8080:8080 --name bookstore bookstore:latest
     
 
 
