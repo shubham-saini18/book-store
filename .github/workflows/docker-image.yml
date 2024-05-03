@@ -23,7 +23,7 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKER_USERNAME }}/book-store:latest
     - name: kubernetes
-      run: kubectl apply -f kubernetes/
+      run: kubectl apply -f Kubernetes/
     
 
 
