@@ -22,8 +22,6 @@ jobs:
       run: docker tag book-store:$(date +%s) shubham1807/book-store:latest
     - name: Push Docker image to Docker Hub
       run: docker push shubham1807/book-store:latest
-    - name: Update Kubernetes manifests
-      run: sed -i 's#image: shubham1807/book-store:.*#image: shubham1807/book-store:latest#' cd Kubernetes/app-deployment.yaml
     - name: Apply Kubernetes manifests
       run: kubectl apply -f /kubernetes
 
