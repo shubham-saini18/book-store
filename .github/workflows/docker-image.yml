@@ -15,11 +15,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag book-store:$(date +%s)
+      run: docker build . --file Dockerfile --tag book-store:latest
     - name: login Docker-hub
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
     - name: Tag the Docker image
-      run: docker tag book-store:$(date +%s) shubham1807/book-store:latest
+      run: docker tag book-store:latest ${{ secrets.DOCKER_USERNAME }}/book-store:latest
     - name: Push Docker image to Docker Hub
       run: docker images
     
