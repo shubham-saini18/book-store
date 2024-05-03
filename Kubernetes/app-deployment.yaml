@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bookstore
-          image: shubham1807/book-store:1.0
+          image: shubham1807/book-store:latest
           ports:
             - containerPort: 8080
           env:   
