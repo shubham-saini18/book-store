@@ -31,7 +31,7 @@ jobs:
     - name: know IP 
       run: ifconfig
     - name: logs of bookstore container 
-      run: docker logs bookstore
+      run: docker ps
 
 
 
