@@ -29,7 +29,8 @@ jobs:
     - name: get container IP
       run: docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' bookstore
     - name: know IP 
-      run: hostname -I
+      run: ifconfig
+
 
 
 
